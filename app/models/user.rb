@@ -27,11 +27,15 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize: size).processed
   end
-  
+
   def following?(user)
     followings.include?(user)
   end
-  
+
+  def followed?(user)
+    followers.include?(user)
+  end
+
   def follow(another_user)
     unless self == another_user
       self.relationships.find_or_create_by(followee_id: another_user.id)
