@@ -1,0 +1,18 @@
+<h2><%= @user.name %>さんとのチャット</h2>
+
+<%= form_with model:@chat, url: user_chats_path(@user), local:true do |f| %>
+  <div class="form-group">
+    <%= f.text_field :body, class: 'col-xs-12 book_body'%>
+  </div>
+  <div class="actions row">
+    <% f.submit %>
+  </div>
+<% end %>
+
+<table>
+  <% @chats.each do |chat| %>
+    <tr>
+      <td><%= chat.body %></td>
+    </tr>
+  <% end %>
+</table>
