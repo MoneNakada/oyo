@@ -5,6 +5,7 @@ class BooksController < ApplicationController
   def show
     @book = Book.find(params[:id])
     @comment = BookComment.new
+    impressionist(@book, nil, unique: [:ip_address])
   end
 
   def index

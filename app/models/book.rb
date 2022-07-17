@@ -6,6 +6,8 @@ class Book < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
 
+  is_impressionable counter_cache: true
+
   def favorited_by?(user)
     Favorite.where(user_id: user.id, book_id: self.id).exists?
   end
