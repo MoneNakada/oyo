@@ -51,6 +51,23 @@ class GroupsController < ApplicationController
     @group.users.delete(current_user)
     redirect_to groups_path
   end
+  
+  def notice_event
+  end
+
+  def create_event_mail
+    @group_member = Group.find(params[:group_id]).group_users
+
+    @group_member.each do |member|
+      EventMailer.with(user_id: member.user.id, title: params[:title], content: params[:content]).notice_email.deliver_later
+    end
+
+    render :confirm_mail
+  end
+
+  def confirm_mail
+    redirect_to groups_path
+  end
 
   private
 

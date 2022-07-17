@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -25,6 +27,9 @@ Rails.application.routes.draw do
   
   resources :groups do    #ここ！
     get "join" => "groups#join"
+    get '/new_event' => 'groups#notice_event'
+    post '/new_event' => 'groups#create_event_mail'
+    get '/confirm_mail' => 'groups#confirm_mail'
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
