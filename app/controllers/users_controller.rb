@@ -12,6 +12,8 @@ class UsersController < ApplicationController
     @last_week_book = @books.created_last_week
   end
 
+
+
   def index
     @users = User.all
     @book = Book.new
@@ -27,7 +29,7 @@ class UsersController < ApplicationController
       render "edit"
     end
   end
-  
+
   def followings
     @user = User.find(params[:id])
   end
